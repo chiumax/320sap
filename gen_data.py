@@ -250,7 +250,44 @@ def gen_data(teams):
 
 pets = find_issue()
 # print(gen_team(100,2))
-gen_data(gen_team(100,5))
+# gen_data(gen_team(100,5))
+
+test_teams = gen_team(1000, 5)
+win = 0
+loss = 0
+best_team = ["pet-worm","pet-otter","pet-buffalo","pet-elephant", "pet-scorpion"]
+
+for op in test_teams:
+  try:
+    res = Battle(Team(best_team), Team(op)).battle()
+  except:
+    pass
+  # print(op, res)
+  if res == 0:
+    win +=1
+  if res ==1:
+    loss +=1
+  if  res == 2:
+    win+=1
+
+print (win, loss)
+
+win = 0
+loss = 0
+worst_team = ["pet-ant", "pet-badger", "pet-puppy", "pet-chicken", "pet-bluebird"]
+for op in test_teams:
+  try:
+    res = Battle(Team(worst_team), Team(op)).battle()
+  except:
+    pass
+  # print(op, res)
+  if res == 0:
+    win +=1
+  if res ==1:
+    loss +=1
+  if  res == 2:
+    win+=1
+print(win,loss)
 # print(pet)
 # keys = data.keys()
 # for key in keys:
