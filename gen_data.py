@@ -207,11 +207,50 @@ def find_issue():
       print(pet)
   return [x for x in pets if x not in fault]
 
+def gen_team(count, size):
+    teams = []
+    for _ in range(count):
+      t1=[]
+      for _ in range(size):
+        t = random.choice(pets)
+        t1.append(t)
+      teams.append(t1)
+
+    return teams
+
+def gen_data(teams):
+  f = open('data/gen_five.csv', 'w')
+  writer = csv.writer(f)
+  writer.writerow(team_header)
+  for idx, x in enumerate(teams):
+    for z in range(idx, len(teams)):
+        # print(x, pets[z])
+      # tier
+      tier1 = 0
+      tier2 = 0
+      t1 = x
+      t2 = teams[z]
+      # print(t1, t2)
+      for p in t1:
+        try:
+          tier1+= int(data["pets"][p]["tier"])
+        except:
+          pass
+      for p in t2:
+        try:
+          tier1+= int(data["pets"][p]["tier"])
+        except:
+          pass
+      try:
+        writer.writerow(['.'.join(t1),'.'.join(t2),str(Battle(Team(t1),Team(t2)).battle()), tier1, tier2])
+      except:
+        print("nnnn")
+        pass
+  f.close()
+
 pets = find_issue()
-gen_two()
-gen_three()
-gen_four()
-gen_five()
+# print(gen_team(100,2))
+gen_data(gen_team(100,5))
 # print(pet)
 # keys = data.keys()
 # for key in keys:
